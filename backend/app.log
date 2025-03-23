@@ -1,0 +1,30 @@
+2025-03-23 05:11:11,092 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.29.33:5000
+2025-03-23 05:11:11,092 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-23 05:11:11,094 - werkzeug - INFO -  * Restarting with stat
+2025-03-23 05:11:12,993 - werkzeug - WARNING -  * Debugger is active!
+2025-03-23 05:11:12,998 - werkzeug - INFO -  * Debugger PIN: 114-896-609
+2025-03-23 05:11:42,890 - error_handler - ERROR - API Error: PDF processing is currently unavailable. Please upload a DOCX file instead.
+2025-03-23 05:11:42,891 - werkzeug - INFO - 127.0.0.1 - - [23/Mar/2025 05:11:42] "[31m[1mPOST /api/analyze HTTP/1.1[0m" 400 -
+2025-03-23 05:11:56,613 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/completions "HTTP/1.1 429 Too Many Requests"
+2025-03-23 05:11:56,614 - openai._base_client - INFO - Retrying request to /completions in 0.383433 seconds
+2025-03-23 05:11:57,315 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/completions "HTTP/1.1 429 Too Many Requests"
+2025-03-23 05:11:57,315 - openai._base_client - INFO - Retrying request to /completions in 0.767723 seconds
+2025-03-23 05:11:59,159 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/completions "HTTP/1.1 429 Too Many Requests"
+2025-03-23 05:11:59,167 - werkzeug - INFO - 127.0.0.1 - - [23/Mar/2025 05:11:59] "POST /api/analyze HTTP/1.1" 200 -
+2025-03-23 05:14:38,829 - werkzeug - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on all addresses (0.0.0.0)
+ * Running on http://127.0.0.1:5000
+ * Running on http://192.168.29.33:5000
+2025-03-23 05:14:38,829 - werkzeug - INFO - [33mPress CTRL+C to quit[0m
+2025-03-23 05:14:38,831 - werkzeug - INFO -  * Restarting with stat
+2025-03-23 05:14:40,655 - werkzeug - WARNING -  * Debugger is active!
+2025-03-23 05:14:40,661 - werkzeug - INFO -  * Debugger PIN: 114-896-609
+2025-03-23 05:15:27,748 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/completions "HTTP/1.1 429 Too Many Requests"
+2025-03-23 05:15:27,749 - openai._base_client - INFO - Retrying request to /completions in 0.399498 seconds
+2025-03-23 05:15:29,386 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/completions "HTTP/1.1 429 Too Many Requests"
+2025-03-23 05:15:29,386 - openai._base_client - INFO - Retrying request to /completions in 0.999055 seconds
+2025-03-23 05:15:32,049 - httpx - INFO - HTTP Request: POST https://api.openai.com/v1/completions "HTTP/1.1 429 Too Many Requests"
+2025-03-23 05:15:32,057 - werkzeug - INFO - 127.0.0.1 - - [23/Mar/2025 05:15:32] "POST /api/analyze HTTP/1.1" 200 -

@@ -1,13 +1,23 @@
 import os
 from flask import Flask, request, jsonify
 from flask_cors import CORS
-import fitz  # PyMuPDF
+try:
+    import fitz  # PyMuPDF
+    PYMUPDF_AVAILABLE = True
+except ImportError:
+    PYMUPDF_AVAILABLE = False
+    print("PyMuPDF not available. PDF extraction will be limited.")
 import docx
 import nltk
 import json
 import re
 from dotenv import load_dotenv
-from openai import OpenAI
+try:
+    from openai import OpenAI
+    OPENAI_AVAILABLE = True
+except ImportError:
+    OPENAI_AVAILABLE = False
+    print("OpenAI SDK not available. Will use fallback analysis.")
 
 # Import error handler
 from error_handler import register_error_handlers, APIError
@@ -27,10 +37,15 @@ CORS(app)
 register_error_handlers(app)
 
 # Set up OpenAI client
-client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
+if OPENAI_AVAILABLE:
+    client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 # Function to extract text from PDF
 def extract_text_from_pdf(pdf_file):
+    if not PYMUPDF_AVAILABLE:
+        # Fallback to inform user PDF processing is unavailable
+        raise APIError("PDF processing is currently unavailable. Please upload a DOCX file instead.", status_code=400)
+    
     try:
         document = fitz.open(stream=pdf_file.read(), filetype="pdf")
         text = ""
@@ -53,8 +68,8 @@ def extract_text_from_docx(docx_file):
 
 # Function to analyze resume with OpenAI API
 def analyze_resume(resume_text, job_description):
-    if not os.getenv("OPENAI_API_KEY"):
-        # No API key provided, use fallback
+    if not OPENAI_AVAILABLE or not os.getenv("OPENAI_API_KEY"):
+        # No API key provided or OpenAI SDK not available, use fallback
         return fallback_analysis(resume_text, job_description)
         
     try:
@@ -176,7 +191,12 @@ def analyze():
 
 @app.route('/api/health', methods=['GET'])
 def health_check():
-    return jsonify({'status': 'ok', 'api_key_configured': bool(os.getenv("OPENAI_API_KEY"))})
+    return jsonify({
+        'status': 'ok', 
+        'api_key_configured': bool(os.getenv("OPENAI_API_KEY")),
+        'pdf_support': PYMUPDF_AVAILABLE,
+        'openai_available': OPENAI_AVAILABLE
+    })
 
 if __name__ == '__main__':
     app.run(debug=os.getenv("FLASK_ENV") == "development", 
